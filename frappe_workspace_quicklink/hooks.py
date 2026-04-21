@@ -27,6 +27,7 @@ app_license = "mit"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/frappe_workspace_quicklink/css/frappe_workspace_quicklink.css"
 # app_include_js = "/assets/frappe_workspace_quicklink/js/frappe_workspace_quicklink.js"
+app_include_js = "/assets/frappe_workspace_quicklink/js/workspace_quicklink.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/frappe_workspace_quicklink/css/frappe_workspace_quicklink.css"
@@ -44,6 +45,7 @@ app_license = "mit"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Workspace": "public/js/workspace_form.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -52,6 +54,28 @@ app_license = "mit"
 # ------------------
 # include app icons in desk
 # app_include_icons = "frappe_workspace_quicklink/public/icons.svg"
+
+# Fixtures
+# ---------
+# Exported with: bench export-fixtures --app frappe_workspace_quicklink
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [["dt", "=", "Workspace"]],
+    },
+    {
+        "dt": "Property Setter",
+        "filters": [
+            [
+                "doc_type",
+                "in",
+                [
+                    "Workspace",
+                ],
+            ]
+        ],
+    },
+]
 
 # Home Pages
 # ----------
@@ -177,6 +201,9 @@ app_license = "mit"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "frappe_workspace_quicklink.event.get_events"
 # }
+override_whitelisted_methods = {
+	"frappe.desk.desktop.get_workspace_sidebar_items": "frappe_workspace_quicklink.api.get_workspace_sidebar_items"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
