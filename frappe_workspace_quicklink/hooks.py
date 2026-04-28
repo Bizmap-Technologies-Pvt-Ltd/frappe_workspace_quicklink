@@ -61,16 +61,27 @@ doctype_js = {"Workspace": "public/js/workspace_form.js"}
 fixtures = [
     {
         "dt": "Custom Field",
-        "filters": [["dt", "=", "Workspace"]],
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Workspace-is_quick_link",
+                    "Workspace-quick_link_type",
+                    "Workspace-quick_link_to",
+                    "Workspace-quick_link_url",
+                ],
+            ]
+        ],
     },
     {
         "dt": "Property Setter",
         "filters": [
             [
-                "doc_type",
+                "name",
                 "in",
                 [
-                    "Workspace",
+                    "Workspace-main-field_order",
                 ],
             ]
         ],
@@ -202,7 +213,7 @@ fixtures = [
 # 	"frappe.desk.doctype.event.event.get_events": "frappe_workspace_quicklink.event.get_events"
 # }
 override_whitelisted_methods = {
-	"frappe.desk.desktop.get_workspace_sidebar_items": "frappe_workspace_quicklink.api.get_workspace_sidebar_items"
+    "frappe.desk.desktop.get_workspace_sidebar_items": "frappe_workspace_quicklink.api.get_workspace_sidebar_items"
 }
 #
 # each overriding function accepts a `data` argument;
@@ -273,4 +284,3 @@ override_whitelisted_methods = {
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
